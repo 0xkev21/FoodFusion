@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+}
+
+:root {
+  --primary: #ee0290;
+  --secondary: #f186c0;
+  --tertiary: #f5b6da;
+  --pale-white: #fbe2f0;
+  --subtle-light: #f5f5f5;
+  --subtle-dark: #2a2a2a;
+  --gray: #474747;
+  --placeholder-color: #6a6a6a;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", "sans-serif";
+}
+
+input {
+  font-family: "Plus Jakarta Sans", "sans-serif";
+}
+
+input::placeholder {
+  font-family: "Plus Jakarta Sans", "sans-serif";
+}
+
+main {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: var(--gray);
+  font-weight: bold;
+  padding-block: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  align-items: center;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+a i, button i {
+  font-size: 1.2rem;
+}
+
+a.active {
+  background-color: var(--pale-white);
+  color: var(--primary);
+}
+
+.logo {
+  width: 2rem;
+}
+
+button {
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--gray);
+  text-align: start;
+  padding-block: 0.5rem;
+  border: none;
+  font-size: 0.9rem;
+  border-radius: 0.25rem;
+  padding: 0.2rem;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  align-items: center;
+}
+
+.logo svg {
+  fill: var(--primary);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.sidebar {
+  background-color: white;
+  padding: 1rem;
+  height: 100%;
+  border-right: 1px solid var(--tertiary);
+}
+
+.dashboard {
+  background-color: var(--subtle-light);
+}
+
+.top {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.side-nav {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  margin-top: 1rem;
+  height: 80%;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.logout-btn {
+  margin-top: auto;
+}

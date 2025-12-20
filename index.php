@@ -1,7 +1,6 @@
 <?php
 $pageTitle = 'Home';
 require 'includes/header.php';
-include 'db/connect.php';
 ?>
 <section class="hero-section">
   <div>

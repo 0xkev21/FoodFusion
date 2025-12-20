@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Recipes';
 
-include 'db/connect.php';
+require 'includes/header.php';
 $recipeData = [];
 $stmt = $con->prepare("SELECT recipes.id, title, description, cuisineType, difficulty, dietaryPref, cookingTimeMinute, imagePath, AVG(rating) as rating, 
                           createdAt from recipes
@@ -16,7 +16,6 @@ if ($stmt->execute()) {
     $recipeData[] = $row;
   }
 }
-require 'includes/header.php'
 ?>
 <script>
   const recipes = <?php echo json_encode($recipeData); ?>;

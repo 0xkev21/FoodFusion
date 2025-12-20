@@ -7,7 +7,7 @@ $userid = $_SESSION['user_id'];
     <button class="post-popup-close">
       <i class="bi bi-x-lg"></i>
     </button>
-    <form action="submitPost.php" method="POST" enctype="multipart/form-data">
+    <form action="api/submitPost.php" method="POST" enctype="multipart/form-data">
       <h3>Share a Recipe</h3>
       <div>
         <textarea name="post_content" id="" title="Post Content" placeholder="Write your recipe or tip here..." required></textarea>

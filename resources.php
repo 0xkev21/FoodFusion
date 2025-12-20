@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Resources';
 
-include 'db/connect.php';
+require 'includes/header.php';
 $resourcesData = [];
 $stmt = $con->prepare("SELECT id, title, description, type, category, coverImagePath from resources;");
 if ($stmt->execute()) {
@@ -10,7 +10,6 @@ if ($stmt->execute()) {
     $resourcesData[] = $row;
   }
 }
-require 'includes/header.php'
 ?>
 <script>
   const resources = <?php echo json_encode($resourcesData); ?>;
@@ -23,7 +22,7 @@ require 'includes/header.php'
 <section class="resources">
   <div class="resource-filters">
     <div class="search-container">
-      <div class="search-input"><i class="bi bi-search"></i><input type="text" name="" id=""
+      <div class="search-input"><i class="bi bi-search"></i><input type="text" name="resource-search" id="resource-search"
           placeholder="Search for a resource..."></div>
     </div>
     <div class="select-btn-group">

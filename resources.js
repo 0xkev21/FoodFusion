@@ -1,5 +1,3 @@
-const currentResources = resources;
-
 const container = document.querySelector(".resources-container");
 
 const renderResources = (data) => {
@@ -33,7 +31,56 @@ const renderResources = (data) => {
 
 const categoryBtns = document.querySelectorAll(".resource-category-btn");
 const typeBtns = document.querySelectorAll(".resource-type-btn");
+const resourceSearch = document.querySelector("#resource-search");
 
-const filterResources = () => {};
+const filterResources = () => {
+  const searchValue = resourceSearch.value;
+  const categoryValue = document
+    .querySelector(".resource-category-btn.active")
+    .getAttribute("data-category");
+  const typeValue = document
+    .querySelector(".resource-type-btn.active")
+    .getAttribute("data-type");
 
-renderResources(currentResources);
+  let filteredResources = resources;
+  if (typeValue != "All") {
+    filteredResources = filteredResources.filter(
+      (resource) => resource.type == typeValue,
+    );
+  }
+  if (categoryValue != "All") {
+    filteredResources = filteredResources.filter(
+      (resource) => resource.category == categoryValue,
+    );
+  }
+  if (searchValue != "") {
+    filteredResources = filteredResources.filter((resource) =>
+      resource.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+  }
+  return filteredResources;
+};
+
+categoryBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    categoryBtns.forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    e.target.classList.add("active");
+    renderResources(filterResources());
+  });
+});
+typeBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    typeBtns.forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    e.target.classList.add("active");
+    renderResources(filterResources());
+  });
+});
+resourceSearch.addEventListener("input", () => {
+  renderResources(filterResources());
+});
+
+renderResources(resources);

@@ -1,5 +1,5 @@
 <?php
-include 'db/connect.php';
+include '../api/db/connect.php';
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }

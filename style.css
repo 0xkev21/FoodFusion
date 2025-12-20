@@ -551,7 +551,7 @@ footer > div > div {
 
 .cookbook {
   background: var(--pale-white);
-  padding: 2rem 1rem;
+  padding: 1rem;
   border-radius: 1rem;
   border: 1px solid var(--tertiary);
 }
@@ -561,13 +561,13 @@ footer > div > div {
 }
 
 .cookbook-content p {
-  margin-bottom: 1rem;
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .post-content {
   font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .post-actions {
@@ -581,7 +581,13 @@ footer > div > div {
   gap: 0.5rem;
   background-color: transparent;
   font-weight: normal;
-  padding: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.post-actions button:hover {
+  background-color: var(--secondary);
 }
 
 .cookbooks-container .card-content-info {
@@ -601,6 +607,11 @@ footer > div > div {
   display: flex;
   gap: 1rem;
   align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.community-profile p {
+  font-size: 0.8rem;
 }
 
 .community-profile-image {
@@ -1418,6 +1429,64 @@ input[type="file"]::file-selector-button:hover {
 
 .post-popup form > div:last-child {
   text-align: right;
+}
+
+/* Comments Popup */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  width: 500px;
+  max-width: 90%;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 15px;
+  overflow-y: auto;
+  flex: 1;
+  background: #f9f9f9;
+}
+
+.modal-footer {
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+.modal-footer form {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-footer input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
 }
 
 /* Responsive Styles */

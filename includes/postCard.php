@@ -16,8 +16,10 @@
       </div>
     <?php endif; ?>
     <div class="post-actions">
-      <button><i class="bi bi-heart"></i><?php echo $row['likeCount'] ?></button>
-      <button><i class="bi bi-chat-left"></i><?php echo $row['commentCount'] ?></button>
+      <button class="like-btn" data-id="<?php echo $row['id'] ?>"><i class="bi <?php echo $row['user_liked'] ? "bi-heart-fill" : "bi-heart" ?>"></i><span><?php echo $row['likeCount'] ?></span></button>
+      <button class="comment-btn" data-id="<?php echo $row['id'] ?>">
+        <i class="bi bi-chat-left"></i> <?php echo $row['commentCount'] ?>
+      </button>
     </div>
   </div>
 </div>

@@ -86,7 +86,7 @@ if (printBtn) {
 // post popup
 const postPopupWrapper = document.querySelector(".post-popup-wrapper");
 const postBtn = document.querySelector("#post");
-if (postPopupWrapper) {
+if (postPopupWrapper && postBtn) {
   const postPopup = document.querySelector(".post-popup");
   const postPopupCloseBtns = document.querySelectorAll(".post-popup-close");
   postBtn.addEventListener("click", () => {
@@ -120,7 +120,7 @@ if (postPopupWrapper) {
     }
   };
   fileInput.addEventListener("change", validateFile);
-} else {
+} else if (postBtn) {
   postBtn.addEventListener("click", () => {
     formWrapper.classList.add("active");
   });

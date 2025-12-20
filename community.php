@@ -6,9 +6,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
 $currentUserId = $isLoggedIn ? $_SESSION['user_id'] : 0;
 ?>
 
-<!-- <script>
-  const isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
-</script> -->
 <script src="comments.js" defer></script>
 
 <section class="community-hero-section">

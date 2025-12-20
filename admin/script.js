@@ -73,3 +73,4 @@ function toggleInput() {
     videoInput.value = "";
   }
 }
+

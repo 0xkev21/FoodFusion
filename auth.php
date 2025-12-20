@@ -19,6 +19,7 @@ function appendError($url, $error, $openMode)
     return $url . $separator . "error=" . urlencode($error) . "&open=" . $openMode;
 }
 
+// Register
 if (isset($_POST['register_btn'])) {
     $first_name = trim($_POST['first_name']);
     $last_name  = trim($_POST['last_name']);
@@ -51,7 +52,8 @@ if (isset($_POST['register_btn'])) {
         $_SESSION['user_id'] = $insert->insert_id;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
-        $_SESSION['created_at'] = $createdAt;
+        $_SESSION['email'] = $email;
+        $_SESSION['created-at'] = date('Y-m-d H:i:s');
 
         header("Location: " . $redirectUrl);
         exit();
@@ -61,13 +63,14 @@ if (isset($_POST['register_btn'])) {
     }
 }
 
+// Login
 if (isset($_POST['login_btn'])) {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
     $redirectUrl = getRedirectUrl();
 
-    $stmt = $con->prepare("SELECT id, firstName, password FROM users WHERE email = ?");
+    $stmt = $con->prepare("SELECT id, firstName, lastName, email, password, createdAt FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -76,7 +79,10 @@ if (isset($_POST['login_btn'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
 
-            $_SESSION['user_name'] = $row['firstName'];
+            $_SESSION['first_name'] = $row['firstName'];
+            $_SESSION['last_name'] = $row['lastName'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['created-at'] = $row['createdAt'];
 
             header("Location: " . $redirectUrl);
             exit();
@@ -90,5 +96,4 @@ if (isset($_POST['login_btn'])) {
     }
 }
 
-// header("Location: index.php");
 exit();

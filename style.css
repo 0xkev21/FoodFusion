@@ -60,6 +60,7 @@ textarea {
   min-height: 10rem;
   resize: vertical;
   max-height: 30rem;
+  font-family: "Plus Jakarta Sans", Arial;
 }
 
 button.primary {
@@ -898,6 +899,46 @@ footer > div > div {
   text-align: center;
 }
 
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.team-member {
+  padding: 2rem 1rem;
+  min-width: 15rem;
+  border: 1px solid var(--secondary);
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+  background-color: var(--pale-white);
+  border-radius: 1rem;
+  flex: 1;
+}
+
+.member-image-container {
+  max-width: 8rem;
+  aspect-ratio: 1;
+}
+
+.team-member h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0rem;
+}
+
+.team-member p:first-of-type {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.team-member p:last-of-type {
+  font-size: 0.95rem;
+}
+
 .about-cta {
   display: flex;
   justify-content: space-between;
@@ -1589,6 +1630,11 @@ input[type="file"]::file-selector-button:hover {
 
   .buttons-container {
     align-self: end;
+  }
+
+
+  .team-member:first-child {
+    order: 2;
   }
 }
 

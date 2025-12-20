@@ -40,6 +40,26 @@ require 'includes/header.php';
 </section>
 <section class="team">
   <h2>Meet the Team</h2>
+  <div class="team-container">
+    <?php
+    $stmt = $con->prepare("SELECT name, role, description, imagePath from admin where 1");
+    if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      while ($row = $result->fetch_assoc()) {
+    ?>
+        <div class="team-member">
+          <div class="member-image-container">
+            <img src="<?php echo $row['imagePath'] ?>" alt="<?php echo $row['name'] ?>">
+          </div>
+          <h3><?php echo $row['name'] ?></h3>
+          <p><?php echo $row['role'] ?></p>
+          <p><?php echo $row['description'] ?></p>
+        </div>
+    <?php
+      }
+    }
+    ?>
+  </div>
 </section>
 <section>
   <div class="about-cta">

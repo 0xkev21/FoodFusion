@@ -70,7 +70,7 @@ require 'includes/header.php';
         connect with fellow food lovers.</p>
     </div>
     <div>
-      <button class="cta-button">Share Your Recipe</button>
+      <a class="cta-button" href="community.php">Join Community</a>
     </div>
   </div>
 </section>

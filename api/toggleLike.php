@@ -47,7 +47,6 @@ $countStmt->execute();
 $countResult = $countStmt->get_result();
 $row = $countResult->fetch_assoc();
 
-// 5. Return JSON Response
 echo json_encode([
   'status' => $action,
   'new_count' => $row['total']

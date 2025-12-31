@@ -23,7 +23,7 @@ if (isset($_POST['send_message_btn'])) {
       $stmt->bind_param("sssi", $name, $email, $message, $typeId);
 
       if ($stmt->execute()) {
-        header("Location: contact.php?status=success");
+        header("Location: contact.php?status=sent");
         exit();
       } else {
         $error = "Something went wrong. Please try again.";
@@ -35,7 +35,7 @@ if (isset($_POST['send_message_btn'])) {
   }
 }
 
-if (isset($_GET['status']) && $_GET['status'] == 'success') {
+if (isset($_GET['status']) && $_GET['status'] == 'sent') {
   $msg = "Message sent successfully! We will get back to you soon.";
 }
 
@@ -68,8 +68,8 @@ if (isset($_GET['status']) && $_GET['status'] == 'success') {
         <input type="text" id="name" name="sender_name" placeholder="Enter your name" required>
       </div>
       <div>
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="sender_email" placeholder="Enter your email address" required>
+        <label for="email-c">Email Address</label>
+        <input type="email" id="email-c" name="sender_email" placeholder="Enter your email address" required autocomplete="email">
       </div>
       <div>
         <label for="subject">Select Subject</label>

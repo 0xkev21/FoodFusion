@@ -125,3 +125,55 @@ if (postPopupWrapper && postBtn) {
     formWrapper.classList.add("active");
   });
 }
+
+function acceptCookies() {
+  fetch("api/storeCookieConsent.php", {
+    method: "POST",
+  }).then(() => {
+    document.getElementById("cookie-banner").style.display = "none";
+    let d = new Date();
+    d.setTime(d.getTime() + 30 * 24 * 60 * 60 * 1000);
+    document.cookie =
+      "foodfusion_cookies=accepted; expires=" + d.toUTCString() + "; path=/";
+  });
+}
+
+if (document.querySelector("#acceptCookiesBtn")) {
+  acceptCookiesBtn.addEventListener("click", acceptCookies);
+  rejectCookiesBtn.addEventListener("click", () => {
+    document.querySelector("#cookie-banner").style.display = "none";
+  });
+}
+
+const showToast = (msg, status = "success") => {
+  const toast = document.querySelector("#toast");
+  toast.classList.toggle(status);
+  toast.classList.add("show");
+  toast.textContent = msg;
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+};
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const status = urlParams.get("status");
+
+  const messages = {
+    posted: "Successfully posted to community!",
+    shared: "Successfully shared to community!",
+    sent: "Enquiry submitted successfully!",
+    rated: "Your rating has been updated!",
+    success: "Action completed successfully!",
+    error: "Something went wrong! Please try again.",
+  };
+
+  if (status && messages[status]) {
+    if (typeof showToast === "function") {
+      showToast(messages[status], status === "error" ? "error" : "success");
+    } else {
+      setTimeout(() => {
+        if (typeof showToast === "function") showToast(messages[status], status);
+      }, 500);
+    }
+  }
+});

@@ -29,9 +29,9 @@ const renderRecipes = (recipes) => {
   let recipesHtml = "";
   recipes.forEach((recipe) => {
     const ratingHtml = recipe.rating
-      ? `<span>:</span><span class="rating"><i class="bi bi-star"></i>${parseFloat(
+      ? `<span>:</span><span class="rating">${parseFloat(
           recipe.rating,
-        ).toFixed(1)}</span>`
+        ).toFixed(1)}<i class="bi bi-star"></i></span>`
       : "";
 
     const cardHtml = `
@@ -54,7 +54,7 @@ const renderRecipes = (recipes) => {
           <span><i class="bi bi-stopwatch"></i>${escapeHTML(
             String(recipe.cookingTimeMinute),
           )} mins</span>
-          ${ratingHtml ? `<span>:</span>${ratingHtml}` : ""}
+          ${ratingHtml}
           <span>:</span>
           <span><i class="bi bi-bar-chart"></i>${recipe.difficulty}</span>
         </div>

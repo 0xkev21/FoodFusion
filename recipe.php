@@ -1,5 +1,7 @@
 <?php
 $printRecipe = true;
+$userRating = 0;
+$hasRated = false;
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
   echo "<script>window.location.assign('index.php');</script>";
@@ -23,7 +25,24 @@ if ($stmtRecipe->execute()) {
   $recipe = $result->fetch_assoc();
 }
 $pageTitle = $recipe['title'];
+
 require 'includes/header.php';
+
+if (isset($_SESSION['user_id'])) {
+  $userId = $_SESSION['user_id'];
+}
+
+$checkSql = "SELECT rating FROM recipeRating WHERE userId = ? AND recipeId = ?";
+$checkStmt = $con->prepare($checkSql);
+$checkStmt->bind_param("ii", $userId, $id);
+
+if ($checkStmt->execute()) {
+  $checkResult = $checkStmt->get_result();
+  if ($row = $checkResult->fetch_assoc()) {
+    $userRating = intval($row['rating']);
+    $hasRated = true;
+  }
+}
 ?>
 <section class="recipe">
   <div class="recipe-container" id="printable-area">
@@ -32,7 +51,7 @@ require 'includes/header.php';
         <p class="cuisintType"><?php echo $recipe['cuisineType'] ?></p>
         <h2><?php echo $recipe['title'] ?></h2>
         <p><?php echo $recipe['description'] ?></p>
-        <div>
+        <div class="rating-avg">
           <?php
           if (isset($recipe['rating'])) {
             for ($i = 0; $i < $recipe['rating']; $i++) {
@@ -118,23 +137,61 @@ require 'includes/header.php';
     <button class="primary print-btn"><i class="bi bi-download"></i>Download</button>
   </div>
   <div>
-    <h4>Rate this Recipe</h4>
-    <form action="">
-      <div class="rating"><input type="radio" id="star5" name="rating" value="5">
-        <label for="star5">&#9733;</label>
-        <input type="radio" id="star4" name="rating" value="4">
-        <label for="star4">&#9733;</label>
-        <input type="radio" id="star3" name="rating" value="3">
-        <label for="star3">&#9733;</label>
-        <input type="radio" id="star2" name="rating" value="2">
-        <label for="star2">&#9733;</label>
-        <input type="radio" id="star1" name="rating" value="1">
-        <label for="star1">&#9733;</label>
+    <h4>Share to Community</h4>
+    <?php if (isset($_SESSION['user_id'])): ?>
+      <button type="button" class="primary" onclick="openShareModal()">
+        <i class="bi bi-share"></i> Share Recipe
+      </button>
+    <?php else: ?>
+      <p style="font-size: 0.85rem; color: #666;">Login to share this recipe</p>
+      <button type="button" class="primary to-register-btn">Login to Share</button>
+    <?php endif; ?>
+  </div>
+  <div>
+    <h4><?php echo $hasRated ? "Update Your Rating" : "Rate this Recipe"; ?></h4>
+    <?php if (isset($_SESSION['user_id'])): ?>
+      <form action="api/rateRecipe.php" method="POST">
+        <input type="hidden" name="recipe_id" value="<?php echo $id; ?>">
+        <div class="rating">
+          <?php for ($i = 5; $i >= 1; $i--): ?>
+            <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>"
+              <?php echo ($userRating == $i) ? 'checked' : ''; ?> required>
+            <label for="star<?php echo $i; ?>">&#9733;</label>
+          <?php endfor; ?>
+        </div>
+        <button type="submit" name="submit_rating" class="primary">
+          <?php echo $hasRated ? "Update Rating" : "Submit"; ?>
+        </button>
+      </form>
+    <?php else: ?>
+      <div class="rating-placeholder">
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Login to rate this recipe</p>
+        <button type="button" class="primary to-register-btn">Rate Now</button>
       </div>
-      <button class="primary">Submit</button>
-    </form>
+    <?php endif; ?>
   </div>
 </section>
+<div id="share-modal" class="custom-modal" style="display:none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Share: <?php echo htmlspecialchars($recipe['title']); ?></h3>
+      <span class="close-btn" onclick="closeShareModal()">&times;</span>
+    </div>
+    <form action="api/shareRecipe.php" method="POST">
+      <div class="modal-body">
+        <input type="hidden" name="recipe_id" value="<?php echo $id; ?>">
+        <textarea name="content" placeholder="Write something about this recipe..." required></textarea>
+      </div>
+      <div class="modal-footer" style="padding: 15px; text-align: right;">
+        <button type="submit" name="submit_share" class="primary">Post to Community</button>
+      </div>
+    </form>
+  </div>
+</div>
+<span class="toast" id="toast">
+  Hello World
+</span>
+<script src="shareRecipe.js"></script>
 <?php
 require 'includes/footer.php';
 ?>

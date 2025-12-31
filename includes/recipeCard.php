@@ -15,7 +15,7 @@
     <h4><?php echo $row['title'] ?></h4>
     <div class="card-content-info">
       <span><i class="bi bi-stopwatch"></i><?php echo $row['cookingTimeMinute'] ?> mins</span>
-      <?php echo $row['rating'] ? '<span>:</span><span class="rating"><i class="bi bi-star"></i>' . $row['rating'] . '</span>' : '' ?>
+      <?php echo $row['rating'] ? '<span>:</span><span class="rating">' . round($row['rating']) . '<i class="bi bi-star"></i>' . '</span>' : '' ?>
       <span>:</span>
       <span><i class="bi bi-bar-chart"></i>
         <?php echo $row['difficulty'] ?>

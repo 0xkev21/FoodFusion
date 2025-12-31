@@ -38,77 +38,66 @@ if ($stmt->execute()) {
       </div>
       <div class="filter-container">
         <h4>Cuisine Type</h4>
-        <div class="radio-container">
-          <input type="radio" name="cuisine-type" id="cuisine-any" value="any" checked>
-          <label for="cuisine-any">Any</label>
-        </div>
+
         <div class="radio-group">
           <div class="radio-container">
-            <input type="radio" name="cuisine-type" id="indian" Value="Indian">
-            <label for="indian">Indian</label>
+            <input type="radio" name="cuisine-type" id="cuisine-any" value="any" checked>
+            <label for="cuisine-any">Any</label>
           </div>
-          <div class="radio-container">
-            <input type="radio" name="cuisine-type" id="thailand" value="Thai">
-            <label for="thailand">Thailand</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="cuisine-type" id="turkish" value="Turkish">
-            <label for="turkish">Turkish</label>
-          </div>
+          <?php
+          $stmtDiff = $con->query("select cuisineType, id from cuisineTypes");
+          while ($row = $stmtDiff->fetch_assoc()) {
+            $cuisine = $row["cuisineType"];
+          ?>
+            <div class="radio-container">
+              <input type="radio" name="cuisine-type" id="cuisine-<?php echo $cuisine ?>" value="<?php echo $cuisine ?>">
+              <label for="cuisine-<?php echo $cuisine ?>"><?php echo $cuisine ?></label>
+            </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <div class="filter-container">
         <h4>Dietary Preferences</h4>
-        <div class="radio-container">
-          <input type="radio" name="dietary-pref" id="dietary-any" value="any" checked>
-          <label for="dietary-any">Any</label>
-        </div>
         <div class="radio-group">
           <div class="radio-container">
-            <input type="radio" name="dietary-pref" id="vege" value="Vegetarian">
-            <label for="vege">Vegetarian</label>
+            <input type="radio" name="dietary-pref" id="dietary-any" value="any" checked>
+            <label for="dietary-any">Any</label>
           </div>
-          <div class="radio-container">
-            <input type="radio" name="dietary-pref" id="vegan" value="Vegan">
-            <label for="vegan">Vegan</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="dietary-pref" id="glu-free" value="Gluten-Free">
-            <label for="glu-free">Gluten-Free</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="dietary-pref" id="halal" value="Halal">
-            <label for="halal">Halal</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="dietary-pref" id="diet-none" value="None">
-            <label for="diet-none">None</label>
-          </div>
+          <?php
+          $stmtDiff = $con->query("select dietaryPref, id from dietaryPref");
+          while ($row = $stmtDiff->fetch_assoc()) {
+            $diet = $row["dietaryPref"];
+          ?>
+            <div class="radio-container">
+              <input type="radio" name="dietary-pref" id="diet-<?php echo $diet ?>" value="<?php echo $diet ?>">
+              <label for="diet-<?php echo $diet ?>"><?php echo $diet ?></label>
+            </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <div class="filter-container">
         <h4>Cooking Difficulty</h4>
+        <div class="radio-container">
+          <input type="radio" name="difficulty" id="difficulty-any" value="any" checked>
+          <label for="difficulty">Any</label>
+        </div>
         <div class="radio-group">
-          <div class="radio-container">
-            <input type="radio" name="difficulty" id="cooking-any" value="any" checked>
-            <label for="cooking-any">Any</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="difficulty" id="easy" value="Easy">
-            <label for="easy">Easy</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="difficulty" id="medium" value="Medium">
-            <label for="medium">Medium</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="difficulty" id="hard" value="Hard">
-            <label for="hard">Hard</label>
-          </div>
-          <div class="radio-container">
-            <input type="radio" name="difficulty" id="profession" value="Profession">
-            <label for="profession">Profession</label>
-          </div>
+          <?php
+          $stmtDiff = $con->query("select difficulty, id from cookingDifficulty");
+          while ($row = $stmtDiff->fetch_assoc()) {
+            $diff = $row["difficulty"];
+          ?>
+            <div class="radio-container">
+              <input type="radio" name="difficulty" id="cooking-<?php echo $diff ?>" value="<?php echo $diff ?>">
+              <label for="cooking-<?php echo $diff ?>"><?php echo $diff ?></label>
+            </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <div class="filter-buttons-container">

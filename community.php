@@ -20,16 +20,19 @@ $currentUserId = $isLoggedIn ? $_SESSION['user_id'] : 0;
             cp.id, u.firstName, u.lastName, 
             cp.uploadAt, 
             cp.content, 
-            cp.imagePath, 
+            cp.imagePath as postImage, 
+            r.id as recipeId, r.title as recipeTitle, r.description as recipeDesc, r.imagePath as recipeImage,
             COUNT(DISTINCT l.id) as likeCount, 
             COUNT(DISTINCT c.id) as commentCount,
             (SELECT COUNT(*) FROM likes WHERE postId = cp.id AND userId = ?) as user_liked
-            FROM communityposts cp
-            JOIN users u ON u.id = cp.userId
-            LEFT JOIN likes l ON cp.id = l.postId
-            LEFT JOIN comments c ON cp.id = c.postId
-            GROUP BY cp.id
-            ORDER BY cp.uploadAt DESC";
+        FROM communityposts cp
+        JOIN users u ON u.id = cp.userId
+        LEFT JOIN shares s ON cp.id = s.postId
+        LEFT JOIN recipes r ON s.shareId = r.id
+        LEFT JOIN likes l ON cp.id = l.postId
+        LEFT JOIN comments c ON cp.id = c.postId
+        GROUP BY cp.id
+        ORDER BY cp.uploadAt DESC";
 
     $stmt = $con->prepare($sql);
 

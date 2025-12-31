@@ -12,24 +12,24 @@ if (isset($_SESSION['user_id'])) {
     <div class="name-inputs">
       <div>
         <label for="first_name">First Name</label>
-        <input type="text" name="first_name" id="first_name">
+        <input type="text" name="first_name" id="first_name" autocomplete="given-name">
       </div>
       <div>
         <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" id="last_name">
+        <input type="text" name="last_name" id="last_name" autocomplete="family-name">
       </div>
     </div>
     <div>
       <label for="email">Email Address</label>
-      <input type="text" name="email" id="email">
+      <input type="text" name="email" id="email" autocomplete="email">
     </div>
     <div>
       <label for="password">Password</label>
-      <input type="text" name="password" id="password">
+      <input type="password" name="password" id="password" autocomplete="new-password">
     </div>
     <div>
       <label for="confirm_password">Confirm Password</label>
-      <input type="text" name="confirm_password" id="confirm_password">
+      <input type="password" name="confirm_password" id="confirm_password" autocomplete="new-password">
     </div>
     <div>
       <button class="submit-btn primary" name="register_btn" value="register" type="submit">Register</button>
@@ -49,11 +49,11 @@ if (isset($_SESSION['user_id'])) {
     </div>
     <div>
       <label for="email-l">Email Address</label>
-      <input type="text" name="email" id="email-l">
+      <input type="text" name="email" id="email-l" autocomplete="email">
     </div>
     <div>
       <label for="password-l">Password</label>
-      <input type="text" name="password" id="password-l">
+      <input type="password" name="password" id="password-l" autocomplete="current-password">
     </div>
     <div>
       <button name="login_btn" value="login" class="submit-btn primary" type="submit">Login</button>

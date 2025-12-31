@@ -1,5 +1,5 @@
 <?php
-include '../api/db/connect.php';
+include '../db/connect.php';
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
@@ -19,12 +19,12 @@ if (isset($_POST['submit_post'])) {
     $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
     $unique_name = "post_" . $user_id . "_" . time() . "." . $file_ext;
-    $upload_destination = "uploads/" . $unique_name;
+    $upload_destination = "../uploads/" . $unique_name;
 
-    $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
+    $allowed_ext = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     if (in_array($file_ext, $allowed_ext)) {
       if (move_uploaded_file($file_tmp, $upload_destination)) {
-        $image_path = $upload_destination;
+        $image_path = "uploads/" . $unique_name;
       } else {
         echo "Failed to upload image.";
         exit();
@@ -40,7 +40,7 @@ if (isset($_POST['submit_post'])) {
   $stmt->bind_param("iss", $user_id, $content, $image_path);
 
   if ($stmt->execute()) {
-    header("Location: community.php?success=posted");
+    header("Location: ../community.php?status=posted");
   } else {
     echo "Error: " . $con->error;
   }
@@ -48,6 +48,6 @@ if (isset($_POST['submit_post'])) {
   $stmt->close();
   $con->close();
 } else {
-  header("Location: community.php");
+  header("Location: ../community.php");
   exit();
 }

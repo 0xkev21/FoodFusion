@@ -33,6 +33,11 @@ textarea {
   font-family: "Plus Jakarta Sans", "sans-serif";
 }
 
+textarea {
+  resize: vertical;
+  max-height: 30rem;
+}
+
 input[type="file"]::file-selector-button {
   background-color: var(--secondary);
   padding: 0.75rem 1rem;
@@ -213,7 +218,7 @@ main {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .logout-btn {
@@ -259,12 +264,14 @@ h1 {
 
 .form-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 15px;
 }
 
 .form-col {
   flex: 1;
+  min-width: 200px;
 }
 
 .btn-submit {
@@ -481,7 +488,6 @@ h1 {
 
 .instruction-row textarea {
   flex-grow: 1;
-  resize: vertical;
   min-height: 60px;
 }
 
@@ -627,7 +633,7 @@ tr:hover {
   height: 24px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -641,7 +647,7 @@ tr:hover {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 24px;
 }
 
@@ -653,7 +659,7 @@ tr:hover {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -663,4 +669,279 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  backdrop-filter: blur(2px);
+}
+
+/* Modal Box */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header */
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--subtle-light);
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--subtle-dark);
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+}
+.close-btn:hover {
+  color: var(--primary);
+}
+
+/* Body */
+.modal-body {
+  padding: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Inner Table Tweaks */
+.inner-table th {
+  background: #fff;
+  font-size: 0.8rem;
+  padding: 12px 20px;
+}
+.inner-table td {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+}
+.inner-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Ensure the modal body can scroll if the table is long */
+.modal-body {
+  padding: 0; /* Remove padding so table can touch edges if needed */
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Wrapper to handle horizontal overflow on small screens */
+.modal-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 15px;
+}
+
+.modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px; /* Ensures columns don't squish too much */
+}
+
+.modal-table th {
+  background: var(--subtle-light);
+  text-align: left;
+  padding: 12px;
+  font-size: 0.85rem;
+  color: var(--gray);
+  border-bottom: 2px solid #eee;
+}
+
+.modal-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f9f9f9;
+  font-size: 0.9rem;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.category-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.category-card h3 {
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.category-card button {
+  width: 100%;
+}
+
+.sidebar-toggle {
+  align-self: start;
+  display: none;
+}
+
+.sidebar-btn-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1.25rem 1rem 0.5rem;
+  background-color: var(--subtle-light);
+  width: 100vw;
+  z-index: 10;
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform 300ms ease, display 300ms ease allow-discrete;
+    transform: translateX(-100%);
+    z-index: 99;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-toggle {
+    display: block;
+    align-self: start;
+    justify-self: start;
+    grid-row: 0;
+  }
+
+  .sidebar.open {
+    display: block;
+    transform: translateX(0);
+  }
+
+  .sidebar-btn-container {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+    display: block;
+    padding-top: 4rem;
+  }
+
+  .dashboard {
+    padding: 1rem;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tbody tr {
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    padding-left: 50% !important;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 700;
+    color: var(--gray);
+    font-size: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .table-img {
+    margin-left: auto;
+  }
+
+  .action-btns {
+    justify-content: flex-end;
+  }
 }

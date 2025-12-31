@@ -37,11 +37,23 @@
       <a href=""><i class="bi bi-instagram"></i></a>
     </div>
   </div>
+  <?php if (!isset($_COOKIE['foodfusion_cookies'])): ?>
+    <div id="cookie-banner" class="cookie-container">
+      <div class="cookie-content">
+        <i class="bi bi-cookie"></i>
+        <p>We use cookies to improve your experience on FoodFusion. By clicking "Accept", you agree to our storage of cookies.</p>
+        <button id="rejectCookiesBtn">Reject</button>
+        <button class="primary" id="acceptCookiesBtn">Accept</button>
+      </div>
+    </div>
+  <?php endif; ?>
 </footer>
+<span class="toast" id="toast">
+  Hello World
+</span>
 <?php
-require 'includes/popup.php'; 
+require 'includes/popup.php';
 ?>
-
 </body>
 
 </html>

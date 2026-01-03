@@ -35,7 +35,7 @@ if (isset($_POST['submit_post'])) {
     }
   }
 
-  $sql = "INSERT INTO communityPosts (userId, content, imagePath) VALUES (?, ?, ?)";
+  $sql = "INSERT INTO communityposts (userId, content, imagePath) VALUES (?, ?, ?)";
   $stmt = $con->prepare($sql);
   $stmt->bind_param("iss", $user_id, $content, $image_path);
 

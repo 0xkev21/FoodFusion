@@ -75,7 +75,7 @@ if (isset($_GET['status']) && $_GET['status'] == 'sent') {
         <label for="subject">Select Subject</label>
         <select name="enquiry_type" id="subject">
           <?php
-          $stmtTypes = $con->prepare("select id, enquiryType from enquiryTypes");
+          $stmtTypes = $con->prepare("select id, enquiryType from enquirytypes");
           if ($stmtTypes->execute()) {
             $result = $stmtTypes->get_result();
             while ($row = $result->fetch_assoc()) {

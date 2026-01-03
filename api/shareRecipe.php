@@ -7,7 +7,7 @@ if (isset($_POST['submit_share']) && isset($_SESSION['user_id'])) {
   $recipeId = intval($_POST['recipe_id']);
   $content = trim($_POST['content']);
 
-  $postSql = "INSERT INTO CommunityPosts (userId, content, uploadAt) VALUES (?, ?, NOW())";
+  $postSql = "INSERT INTO communityposts (userId, content, uploadAt) VALUES (?, ?, NOW())";
   $stmtPost = $con->prepare($postSql);
   $stmtPost->bind_param("is", $userId, $content);
 

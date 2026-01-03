@@ -65,7 +65,7 @@ if (isset($_POST['submit_recipe'])) {
 
       $checkIng = $con->prepare("SELECT id FROM ingredients WHERE ingredient = ?");
       $insertIng = $con->prepare("INSERT INTO ingredients (ingredient) VALUES (?)");
-      $linkIng = $con->prepare("INSERT INTO recipeIngredients (recipeId, ingredientId, amount, unitId) VALUES (?, ?, ?, ?)");
+      $linkIng = $con->prepare("INSERT INTO recipeingredients (recipeId, ingredientId, amount, unitId) VALUES (?, ?, ?, ?)");
 
       if (!empty($ingNames)) {
         foreach ($ingNames as $index => $name) {
@@ -145,7 +145,7 @@ if (isset($_POST['submit_recipe'])) {
           <div class="select-wrapper">
             <select id="cuisine-type" name="cuisine">
               <?php
-              $stmtTypes = $con->query("select cuisineType, id from cuisineTypes");
+              $stmtTypes = $con->query("select cuisineType, id from cuisinetypes");
               while ($row = $stmtTypes->fetch_assoc()) {
                 echo '<option value="' . $row['id'] . '">' . $row['cuisineType'] . '</option>';
               }
@@ -163,7 +163,7 @@ if (isset($_POST['submit_recipe'])) {
           <div class="select-wrapper">
             <select id="difficulty" name="difficulty">
               <?php
-              $stmtDiff = $con->query("select difficulty, id from cookingDifficulty");
+              $stmtDiff = $con->query("select difficulty, id from cookingdifficulty");
               while ($row = $stmtDiff->fetch_assoc()) {
                 echo '<option value="' . $row['id'] . '">' . $row['difficulty'] . '</option>';
               }
@@ -181,7 +181,7 @@ if (isset($_POST['submit_recipe'])) {
           <div class="select-wrapper">
             <select id="dietary" name="dietary_preference" required>
               <?php
-              $stmtDiet = $con->query("select dietaryPref, id from dietaryPref");
+              $stmtDiet = $con->query("select dietaryPref, id from dietarypref");
               while ($row = $stmtDiet->fetch_assoc()) {
                 echo '<option value="' . $row['id'] . '">' . $row['dietaryPref'] . '</option>';
               }

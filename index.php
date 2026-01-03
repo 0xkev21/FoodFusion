@@ -15,9 +15,9 @@ require 'includes/header.php';
     <?php
     $stmt = $con->prepare("SELECT recipes.id, title, description, cuisineType, difficulty, dietaryPref, cookingTimeMinute, imagePath, AVG(rating) as rating from recipes
                           left join reciperating on recipes.id = recipeId 
-                          join cuisineTypes on cuisineTypeId = cuisineTypes.id
-                          join cookingDifficulty on difficultyId = cookingDifficulty.id
-                          join dietaryPref on dietaryPrefId = dietaryPref.id
+                          join cuisinetypes on cuisineTypeId = cuisinetypes.id
+                          join cookingdifficulty on difficultyId = cookingdifficulty.id
+                          join dietarypref on dietaryPrefId = dietarypref.id
                           where isFeatured = true group by recipes.id;");
     if ($stmt->execute()) {
       $featuredRecipes = $stmt->get_result();

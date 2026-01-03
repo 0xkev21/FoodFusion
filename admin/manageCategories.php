@@ -7,17 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $msg = "";
   if (isset($_POST['add_cuisine'])) {
     $name = $_POST['cuisine_name'];
-    $stmt = $con->prepare("INSERT INTO cuisineTypes (cuisineType) VALUES (?)");
+    $stmt = $con->prepare("INSERT INTO cuisinetypes (cuisineType) VALUES (?)");
     $stmt->bind_param("s", $name);
     if ($stmt->execute()) $msg = "Cuisine added!";
   } elseif (isset($_POST['add_difficulty'])) {
     $name = $_POST['difficulty_name'];
-    $stmt = $con->prepare("INSERT INTO cookingDifficulty (difficulty) VALUES (?)");
+    $stmt = $con->prepare("INSERT INTO cookingdifficulty (difficulty) VALUES (?)");
     $stmt->bind_param("s", $name);
     if ($stmt->execute()) $msg = "Difficulty level added!";
   } elseif (isset($_POST['add_dietary'])) {
     $name = $_POST['dietary_name'];
-    $stmt = $con->prepare("INSERT INTO dietaryPref (dietaryPref) VALUES (?)");
+    $stmt = $con->prepare("INSERT INTO dietarypref (dietaryPref) VALUES (?)");
     $stmt->bind_param("s", $name);
     if ($stmt->execute()) $msg = "Dietary preference added!";
   }

@@ -21,7 +21,7 @@ if (isset($_POST['reserve_spot_btn'])) {
   if (empty($r_name) || empty($r_email)) {
     $error = "Please fill in all fields.";
   } else {
-    $check = $con->prepare("SELECT id FROM eventRegistrations WHERE eventId = ? AND email = ?");
+    $check = $con->prepare("SELECT id FROM eventregistrations WHERE eventId = ? AND email = ?");
     $check->bind_param("is", $r_event_id, $r_email);
     $check->execute();
     $check->store_result();
@@ -29,7 +29,7 @@ if (isset($_POST['reserve_spot_btn'])) {
     if ($check->num_rows > 0) {
       $error = "You have already registered for this event with this email.";
     } else {
-      $insert = $con->prepare("INSERT INTO eventRegistrations (eventId, userId, name, email) VALUES (?, ?, ?, ?)");
+      $insert = $con->prepare("INSERT INTO eventregistrations (eventId, userId, name, email) VALUES (?, ?, ?, ?)");
       $insert->bind_param("iiss", $r_event_id, $r_user_id, $r_name, $r_email);
 
       if ($insert->execute()) {

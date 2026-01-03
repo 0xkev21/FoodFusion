@@ -6,7 +6,7 @@ require 'checkLogin.php';
 
 $sql = "SELECT e.*, COUNT(r.id) as attendeeCount 
         FROM events e 
-        LEFT JOIN eventRegistrations r ON e.id = r.eventId 
+        LEFT JOIN eventregistrations r ON e.id = r.eventId 
         GROUP BY e.id 
         ORDER BY e.eventDate DESC";
 $result = $con->query($sql);
@@ -66,7 +66,7 @@ $result = $con->query($sql);
                       <div class="modal-body">
                         <?php
                         $evtId = $row['id'];
-                        $partSql = "SELECT * FROM eventRegistrations WHERE eventId = $evtId ORDER BY registeredAt DESC";
+                        $partSql = "SELECT * FROM eventregistrations WHERE eventId = $evtId ORDER BY registeredAt DESC";
                         $partResult = $con->query($partSql);
                         ?>
                         <?php if ($partResult && $partResult->num_rows > 0): ?>

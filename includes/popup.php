@@ -4,7 +4,7 @@ if (isset($_SESSION['user_id'])) {
 }
 ?>
 <div class="form-wrapper form-close">
-  <form action="/foodfusion/auth.php" method="post" class="register-form active">
+  <form action="auth.php" method="post" class="register-form active">
     <div>
       <h2>Join Our Community</h2>
       <p>Create an account to share youemailr favourite recipes.</p>
@@ -40,7 +40,7 @@ if (isset($_SESSION['user_id'])) {
     <button class="close-btn form-close" type="button"><i class="bi bi-x"></i></button>
     <input type="hidden" name="redirect_to" value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
   </form>
-  <form action="/foodfusion/auth.php" method="post" class="login-form">
+  <form action="auth.php" method="post" class="login-form">
     <div>
       <h2>Welcome back!</h2>
       <p>Please login.</p>

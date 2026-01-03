@@ -12,9 +12,9 @@ include 'db/connect.php';
 
 $sqlRecipe = "SELECT recipes.id, title, description, cuisineType, difficulty, dietaryPref, cookingTimeMinute, imagePath, AVG(rating) as rating from recipes
         left join reciperating on recipes.id = recipeId 
-        join cuisineTypes on cuisineTypeId = cuisineTypes.id
-        join cookingDifficulty on difficultyId = cookingDifficulty.id
-        join dietaryPref on dietaryPrefId = dietaryPref.id
+        join cuisinetypes on cuisineTypeId = cuisinetypes.id
+        join cookingdifficulty on difficultyId = cookingdifficulty.id
+        join dietarypref on dietaryPrefId = dietarypref.id
         where recipes.id = ?
         group by recipes.id;";
 $stmtRecipe = $con->prepare($sqlRecipe);
@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
   $userId = $_SESSION['user_id'];
 }
 
-$checkSql = "SELECT rating FROM recipeRating WHERE userId = ? AND recipeId = ?";
+$checkSql = "SELECT rating FROM reciperating WHERE userId = ? AND recipeId = ?";
 $checkStmt = $con->prepare($checkSql);
 $checkStmt->bind_param("ii", $userId, $id);
 
@@ -97,7 +97,7 @@ if ($checkStmt->execute()) {
         <ul>
           <?php
           $sqlIngredients = "SELECT ingredient, amount, unit FROM ingredients
-                              join recipeIngredients on ingredients.id = ingredientId
+                              join recipeingredients on ingredients.id = ingredientId
                               join unit on unitId = unit.id
                               join recipes on recipes.id = recipeId
                               where recipes.id = ?";

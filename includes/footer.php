@@ -37,7 +37,7 @@
       <a href=""><i class="bi bi-instagram"></i></a>
     </div>
   </div>
-  <?php if (!isset($_COOKIE['foodfusion_cookies'])): ?>
+  <?php if (isset($_COOKIE['foodfusion_cookies'])): ?>
     <div id="cookie-banner" class="cookie-container">
       <div class="cookie-content">
         <i class="bi bi-cookie"></i>

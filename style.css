@@ -1893,6 +1893,7 @@ input[type="file"]::file-selector-button:hover {
 .cookie-content {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
@@ -1905,6 +1906,14 @@ input[type="file"]::file-selector-button:hover {
   font-size: 0.9rem;
   margin: 0;
   color: #555;
+  width: auto;
+  flex: 1;
+  flex-basis: 80%;
+}
+
+.cookie-content button:first-of-type {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 #toast {

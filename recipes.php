@@ -6,9 +6,9 @@ $recipeData = [];
 $stmt = $con->prepare("SELECT recipes.id, title, description, cuisineType, difficulty, dietaryPref, cookingTimeMinute, imagePath, AVG(rating) as rating, 
                           createdAt from recipes
                           left join reciperating on recipes.id = recipeId 
-                          join cuisineTypes on cuisineTypeId = cuisineTypes.id
-                          join cookingDifficulty on difficultyId = cookingDifficulty.id
-                          join dietaryPref on dietaryPrefId = dietaryPref.id
+                          join cuisinetypes on cuisineTypeId = cuisinetypes.id
+                          join cookingdifficulty on difficultyId = cookingdifficulty.id
+                          join dietarypref on dietaryPrefId = dietarypref.id
                           group by recipes.id order by createdAt desc, recipes.id asc");
 if ($stmt->execute()) {
   $result = $stmt->get_result();
@@ -45,7 +45,7 @@ if ($stmt->execute()) {
             <label for="cuisine-any">Any</label>
           </div>
           <?php
-          $stmtDiff = $con->query("select cuisineType, id from cuisineTypes");
+          $stmtDiff = $con->query("select cuisineType, id from cuisinetypes");
           while ($row = $stmtDiff->fetch_assoc()) {
             $cuisine = $row["cuisineType"];
           ?>
@@ -66,7 +66,7 @@ if ($stmt->execute()) {
             <label for="dietary-any">Any</label>
           </div>
           <?php
-          $stmtDiff = $con->query("select dietaryPref, id from dietaryPref");
+          $stmtDiff = $con->query("select dietaryPref, id from dietarypref");
           while ($row = $stmtDiff->fetch_assoc()) {
             $diet = $row["dietaryPref"];
           ?>
@@ -87,7 +87,7 @@ if ($stmt->execute()) {
         </div>
         <div class="radio-group">
           <?php
-          $stmtDiff = $con->query("select difficulty, id from cookingDifficulty");
+          $stmtDiff = $con->query("select difficulty, id from cookingdifficulty");
           while ($row = $stmtDiff->fetch_assoc()) {
             $diff = $row["difficulty"];
           ?>

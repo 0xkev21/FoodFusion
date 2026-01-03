@@ -23,33 +23,35 @@ if (formWrapper) {
       e.stopPropagation();
     });
   });
-}
 
-const toLoginBtns = document.querySelectorAll(".to-login-btn");
-const toRegisterBtns = document.querySelectorAll(".to-register-btn");
-const loginForm = document.querySelector(".login-form");
-const registerForm = document.querySelector(".register-form");
-toLoginBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    formWrapper.classList.add("active");
-    loginForm.classList.add("active");
-    registerForm.classList.remove("active");
-  });
-});
-toRegisterBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    formWrapper.classList.add("active");
-    registerForm.classList.add("active");
-    loginForm.classList.remove("active");
-  });
-});
+  const currentPath = window.location.pathname;
+  if (
+    currentPath === "/foodfusion/index.php" ||
+    currentPath === "/foodfusion/"
+  ) {
+    setTimeout(() => {
+      formWrapper.classList.add("active");
+    }, 10000);
+  }
 
-// Form Popup
-const currentPath = window.location.pathname;
-if (currentPath === "/foodfusion/index.php" || currentPath === "/foodfusion/") {
-  setTimeout(() => {
-    formWrapper.classList.add("active");
-  }, 10000);
+  const toLoginBtns = document.querySelectorAll(".to-login-btn");
+  const toRegisterBtns = document.querySelectorAll(".to-register-btn");
+  const loginForm = document.querySelector(".login-form");
+  const registerForm = document.querySelector(".register-form");
+  toLoginBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      formWrapper.classList.add("active");
+      loginForm.classList.add("active");
+      registerForm.classList.remove("active");
+    });
+  });
+  toRegisterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      formWrapper.classList.add("active");
+      registerForm.classList.add("active");
+      loginForm.classList.remove("active");
+    });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -172,7 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
       showToast(messages[status], status === "error" ? "error" : "success");
     } else {
       setTimeout(() => {
-        if (typeof showToast === "function") showToast(messages[status], status);
+        if (typeof showToast === "function")
+          showToast(messages[status], status);
       }, 500);
     }
   }

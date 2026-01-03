@@ -5,8 +5,8 @@ include 'checkLogin.php';
 
 $sql = "SELECT recipes.id, imagePath, title, createdAt, cuisineType, difficulty, isFeatured 
         FROM recipes
-        JOIN cuisineTypes ON cuisineTypeId = cuisineTypes.id
-        JOIN cookingDifficulty ON difficultyId = cookingdifficulty.id 
+        JOIN cuisinetypes ON cuisinetypeId = cuisinetypes.id
+        JOIN cookingdifficulty ON difficultyId = cookingdifficulty.id 
         ORDER BY createdAt DESC";
 
 $result = $con->query($sql);
@@ -44,7 +44,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : "";
               <td data-label="Image">
                 <div class="table-img">
                   <?php if ($row['imagePath']): ?>
-                    <img src="<?php echo '/foodfusion/' . $row['imagePath']; ?>" alt="Recipe">
+                    <img src="<?php echo '../' . $row['imagePath']; ?>" alt="Recipe">
                   <?php else: ?>
                     <div class="no-img">?</div>
                   <?php endif; ?>

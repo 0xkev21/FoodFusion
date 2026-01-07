@@ -15,8 +15,19 @@ function getRedirectUrl()
 
 function appendError($url, $error, $openMode)
 {
-    $separator = (strpos($url, '?') === false) ? '?' : '&';
-    return $url . $separator . "error=" . urlencode($error) . "&open=" . $openMode;
+    $urlParts = parse_url($url);
+    $path = $urlParts['path'] ?? 'index.php';
+
+    $queryParams = [];
+
+    if (isset($urlParts['query'])) {
+        parse_str($urlParts['query'], $queryParams);
+    }
+
+    $queryParams['error'] = $error;
+    $queryParams['open'] = $openMode;
+
+    return $path . '?' . http_build_query($queryParams);
 }
 
 // Register
@@ -63,12 +74,20 @@ if (isset($_POST['register_btn'])) {
     }
 }
 
-// Login
+// login
 if (isset($_POST['login_btn'])) {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-
     $redirectUrl = getRedirectUrl();
+
+    // 1. SESSION LOCKOUT CHECK
+    $now = time();
+    if (isset($_SESSION['lockout_until']) && $_SESSION['lockout_until'] > $now) {
+        $secondsRemaining = $_SESSION['lockout_until'] - $now;
+        $minutes = ceil($secondsRemaining / 60);
+        header("Location: " . appendError($redirectUrl, "Too many attempts. Try again in $minutes mins.", "login"));
+        exit();
+    }
 
     $stmt = $con->prepare("SELECT id, firstName, lastName, email, password, createdAt FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
@@ -77,8 +96,11 @@ if (isset($_POST['login_btn'])) {
 
     if ($row = $result->fetch_assoc()) {
         if (password_verify($password, $row['password'])) {
-            $_SESSION['user_id'] = $row['id'];
+            // SUCCESS: Clear session attempts
+            unset($_SESSION['login_attempts']);
+            unset($_SESSION['lockout_until']);
 
+            $_SESSION['user_id'] = $row['id'];
             $_SESSION['first_name'] = $row['firstName'];
             $_SESSION['last_name'] = $row['lastName'];
             $_SESSION['email'] = $row['email'];
@@ -87,7 +109,19 @@ if (isset($_POST['login_btn'])) {
             header("Location: " . $redirectUrl);
             exit();
         } else {
-            header("Location: " . appendError($redirectUrl, "Invalid password", "login"));
+            // FAILURE: Increment session attempts
+            $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
+
+            if ($_SESSION['login_attempts'] >= 3) {
+                // Lock for 15 minutes
+                $_SESSION['lockout_until'] = time() + (15 * 60);
+                $errorMsg = "Account locked for 15 minutes due to 3 failed attempts.";
+            } else {
+                $remaining = 3 - $_SESSION['login_attempts'];
+                $errorMsg = "Invalid password. $remaining attempts remaining.";
+            }
+
+            header("Location: " . appendError($redirectUrl, $errorMsg, "login"));
             exit();
         }
     } else {

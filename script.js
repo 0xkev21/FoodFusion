@@ -41,14 +41,14 @@ if (formWrapper) {
   toLoginBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       formWrapper.classList.add("active");
-      loginForm.classList.add("active");
+      loginForm?.classList.add("active");
       registerForm.classList.remove("active");
     });
   });
   toRegisterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       formWrapper.classList.add("active");
-      registerForm.classList.add("active");
+      registerForm?.classList.add("active");
       loginForm.classList.remove("active");
     });
   });
@@ -182,11 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Clean up auth errors from URL after 2 seconds
-if (window.location.search.includes('error=')) {
-    setTimeout(() => {
-        const url = new URL(window.location);
-        url.searchParams.delete('error');
-        url.searchParams.delete('open');
-        window.history.replaceState({}, document.title, url.pathname);
-    }, 2000);
+if (window.location.search.includes("error=")) {
+  setTimeout(() => {
+    const url = new URL(window.location);
+    url.searchParams.delete("error");
+    url.searchParams.delete("open");
+    window.history.replaceState({}, document.title, url.pathname);
+  }, 2000);
 }

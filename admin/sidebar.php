@@ -55,6 +55,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <i class="bi bi-menu-button-wide"></i>Recipe Categories
     </a>
 
+    <a href="settings.php"
+      class="<?php echo ($current_page == 'settings.php') ? 'active' : ''; ?>">
+      <i class="bi bi-gear"></i>Settings
+    </a>
+
     <a class="logout-btn" href="adminLogout.php">
       <i class="bi bi-box-arrow-left"></i>Logout
     </a>

@@ -945,3 +945,54 @@ input:checked + .slider:before {
     justify-content: flex-end;
   }
 }
+
+/* Maintain your Primary Orange/Red Theme */
+
+.settings-container {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.settings-form {
+  max-width: 500px;
+  margin: 40px;
+  padding: 30px;
+}
+
+.settings-form h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.settings-form p {
+  margin-bottom: 20px;
+}
+
+.settings-form .input-group {
+  margin-bottom: 20px;
+}
+
+.settings-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.settings-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Use your established primary button style */
+.settings-form .primary {
+  background-color: #ff4757; /* Replace with your specific brand color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.settings-form .primary:hover {
+  opacity: 0.9;
+}

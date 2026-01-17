@@ -6,7 +6,7 @@ require 'includes/header.php';
   <div>
     <h2 class="hero-title">Discover the Joy of Home Cooking</h2>
     <p>FoodFusion is a vibrant community for food lovers to share, discover, and learn the art of home cooking.</p>
-    <button class="primary">Join for Free</button>
+    <button class="primary to-register-btn">Join for Free</button>
   </div>
 </section>
 <section class="featured">

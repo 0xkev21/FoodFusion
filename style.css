@@ -236,8 +236,8 @@ header a.active::after {
   min-height: 90vh;
   display: grid;
   place-content: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2)),
-    url("images/static/hero-bg.png");
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2)), url("images/static/hero-bg.png");
   color: var(--background-light);
   background-position: center;
   background-size: cover;
@@ -338,7 +338,9 @@ h4 {
   color: white;
   display: none;
   opacity: 0;
-  transition: opacity 300ms ease, display 300ms ease allow-discrete;
+  transition:
+    opacity 300ms ease,
+    display 300ms ease allow-discrete;
 }
 
 .card:hover .recipe-des {
@@ -459,6 +461,7 @@ footer {
   background-color: var(--subtle-light);
   flex-wrap: wrap;
   gap: 2rem;
+  align-items: flex-start;
   border-top: 1px solid rgb(228, 228, 228);
 }
 
@@ -908,8 +911,8 @@ footer a:hover {
   place-content: center;
   gap: 1rem;
   text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2)),
-    url("images/static/about-hero.png");
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2)), url("images/static/about-hero.png");
   background-position: center;
   background-size: cover;
   border-radius: 1rem;
@@ -1225,6 +1228,10 @@ footer a:hover {
   color: var(--primary);
   padding: 0;
   padding-inline: 0.5rem;
+}
+
+.hero-section .to-register-btn {
+  padding: 1rem 2rem;
 }
 
 .form-wrapper form.active {
@@ -1936,7 +1943,9 @@ input[type="file"]::file-selector-button:hover {
   transform: translateX(-50%);
   border-radius: 2rem;
   z-index: 9999;
-  transition: opacity 200ms ease, display 200ms ease allow-discrete;
+  transition:
+    opacity 200ms ease,
+    display 200ms ease allow-discrete;
   display: none;
   opacity: 0;
 }
@@ -1951,4 +1960,28 @@ input[type="file"]::file-selector-button:hover {
 #toast.show {
   display: block;
   opacity: 1;
+}
+
+.legal-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 20px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.legal-content h1 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.legal-content h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #fdf2f5;
+  padding-bottom: 5px;
+}
+
+.legal-content p {
+  margin-bottom: 15px;
 }

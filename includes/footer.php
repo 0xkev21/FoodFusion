@@ -1,7 +1,7 @@
 </main>
 <footer>
   <div>
-    <div class="logo-container">
+    <a class="logo-container" href="../index.php">
       <div class="logo">
         <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -10,23 +10,26 @@
         </svg>
       </div>
       <h1>FoodFusion</h1>
-    </div>
+    </a>
     <p>Sharing the joy of home cooking.</p>
   </div>
   <div>
     <h4>Quick Links</h4>
     <div>
-      <a href="">About Us</a>
-      <a href="">Contact</a>
-      <a href="">Community</a>
+      <a href="../index.php">Home</a>
+      <a href="../recipes.php">Recipes</a>
+      <a href="../community.php">Community</a>
+      <a href="../resources.php">Resources</a>
+      <a href="../about.php">About Us</a>
+      <a href="../contact.php">Contact</a>
     </div>
   </div>
   <div>
     <h4>Legal</h4>
     <div>
-      <a href="">Privacy Policy</a>
-      <a href="">Terms of Service</a>
-      <a href="">Cookie Policy</a>
+      <a href="../privacy-policy.php">Privacy Policy</a>
+      <a href="../terms.php">Terms of Service</a>
+      <a href="../cookie-policy.php">Cookie Policy</a>
     </div>
   </div>
   <?php

@@ -217,12 +217,17 @@ main {
   height: 80%;
 }
 
+.side-nav a:hover {
+  background-color: var(--pale-white);
+}
+
 h1 {
   font-size: 1.5rem;
 }
 
 .logout-btn {
   margin-top: auto;
+  color: rgb(255, 122, 122);
 }
 
 .dashboard {
@@ -844,7 +849,9 @@ input:checked + .slider:before {
     position: fixed;
     top: 0;
     left: 0;
-    transition: transform 300ms ease, display 300ms ease allow-discrete;
+    transition:
+      transform 300ms ease,
+      display 300ms ease allow-discrete;
     transform: translateX(-100%);
     z-index: 99;
   }
@@ -984,6 +991,20 @@ input:checked + .slider:before {
   border-radius: 8px;
 }
 
+.primary {
+  color: white;
+  background-color: var(--primary);
+  padding: 0.75rem 1rem;
+}
+
+.socials-form {
+  align-items: flex-start;
+}
+
+.socials-form .primary {
+  width: auto;
+}
+
 /* Use your established primary button style */
 .settings-form .primary {
   background-color: #ff4757; /* Replace with your specific brand color */
@@ -995,4 +1016,41 @@ input:checked + .slider:before {
 
 .settings-form .primary:hover {
   opacity: 0.9;
+}
+
+.auth-msg {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-msg {
+  background-color: #fceaea;
+  color: #e74c3c;
+  border: 1px solid #f5c6cb;
+}
+
+/* Success Pink/Red accent */
+.success-msg {
+  background-color: #fdf2f5;
+  color: #ff477e;
+  border: 1px solid #ffcada;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }

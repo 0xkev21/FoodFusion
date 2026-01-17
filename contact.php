@@ -1,11 +1,11 @@
 <?php
-
 $msg = "";
 $error = "";
 
 $pageTitle = 'Contact';
 require 'includes/header.php';
 
+// Handle Form Submission
 if (isset($_POST['send_message_btn'])) {
   $name = trim($_POST['sender_name']);
   $email = trim($_POST['sender_email']);
@@ -17,28 +17,31 @@ if (isset($_POST['send_message_btn'])) {
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $error = "Please enter a valid email address.";
   } else {
+    // Insert into enquiries table
     $sql = "INSERT INTO enquiries (senderName, senderEmail, enquiry, enquiryTypeId) VALUES (?, ?, ?, ?)";
 
     if ($stmt = $con->prepare($sql)) {
       $stmt->bind_param("sssi", $name, $email, $message, $typeId);
 
       if ($stmt->execute()) {
+        // Redirect to clear POST data and trigger success state
         header("Location: contact.php?status=sent");
         exit();
       } else {
         $error = "Something went wrong. Please try again.";
       }
       $stmt->close();
-    } else {
-      $error = "Database error: " . $con->error;
     }
   }
 }
 
+// Check for status from URL
 if (isset($_GET['status']) && $_GET['status'] == 'sent') {
   $msg = "Message sent successfully! We will get back to you soon.";
 }
 
+// Fetch Dynamic Social Links for the right sidebar
+$socials = $con->query("SELECT platform, url FROM social_links");
 ?>
 
 <section class="contact-hero-section">
@@ -49,16 +52,15 @@ if (isset($_GET['status']) && $_GET['status'] == 'sent') {
 
 <section class="contact-container">
   <div class="contact-left">
-
     <?php if ($error): ?>
-      <div style="background:#ffe6e6; color:#d63031; padding:10px; border-radius:5px; margin-bottom:15px;">
-        <?php echo $error; ?>
+      <div class="auth-msg error-msg">
+        <i class="bi bi-exclamation-circle"></i> <?php echo $error; ?>
       </div>
     <?php endif; ?>
 
     <?php if ($msg): ?>
-      <div style="background:#e6fff0; color:#00b894; padding:10px; border-radius:5px; margin-bottom:15px;">
-        <?php echo $msg; ?>
+      <div class="auth-msg success-msg">
+        <i class="bi bi-check-circle"></i> <?php echo $msg; ?>
       </div>
     <?php endif; ?>
 
@@ -69,20 +71,15 @@ if (isset($_GET['status']) && $_GET['status'] == 'sent') {
       </div>
       <div>
         <label for="email-c">Email Address</label>
-        <input type="email" id="email-c" name="sender_email" placeholder="Enter your email address" required autocomplete="email">
+        <input type="email" id="email-c" name="sender_email" placeholder="Enter your email address" required>
       </div>
       <div>
         <label for="subject">Select Subject</label>
         <select name="enquiry_type" id="subject">
           <?php
-          $stmtTypes = $con->prepare("select id, enquiryType from enquirytypes");
-          if ($stmtTypes->execute()) {
-            $result = $stmtTypes->get_result();
-            while ($row = $result->fetch_assoc()) {
-          ?>
-              <option value="<?php echo $row['id'] ?>"><?php echo $row['enquiryType'] ?></option>
-          <?php
-            }
+          $stmtTypes = $con->query("SELECT id, enquiryType FROM enquirytypes");
+          while ($row = $stmtTypes->fetch_assoc()) {
+            echo "<option value='{$row['id']}'>{$row['enquiryType']}</option>";
           }
           ?>
         </select>
@@ -101,11 +98,14 @@ if (isset($_GET['status']) && $_GET['status'] == 'sent') {
     <div class="contact-info">
       <h3>Contact Information</h3>
       <p>Reach us out through the following channels</p>
-      <div><i class="bi bi-envelope"></i>support@foodfusion.io</div>
-      <div>
+      <div class="info-item"><i class="bi bi-envelope"></i> support@foodfusion.io</div>
+      <div class="info-item social-icons">
         <i class="bi bi-globe"></i>
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
+        <?php while($s = $socials->fetch_assoc()): ?>
+          <a href="<?php echo htmlspecialchars($s['url']); ?>" target="_blank">
+            <?php echo ucfirst($s['platform']); ?>
+          </a>
+        <?php endwhile; ?>
       </div>
     </div>
   </div>

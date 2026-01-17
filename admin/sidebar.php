@@ -25,20 +25,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <i class="bi bi-fork-knife"></i>Recipes
     </a>
 
-    <a href="createRecipe.php"
+    <!-- <a href="createRecipe.php"
       class="<?php echo ($current_page == 'createRecipe.php') ? 'active' : ''; ?>">
       <i class="bi bi-patch-plus"></i>Create New Recipe
-    </a>
+    </a> -->
 
     <a href="events.php"
       class="<?php echo ($current_page == 'events.php' || $current_page == 'admin_events.php') ? 'active' : ''; ?>">
       <i class="bi bi-calendar-event"></i>Events
     </a>
 
-    <a href="createEvent.php"
+    <!-- <a href="createEvent.php"
       class="<?php echo ($current_page == 'createEvent.php' || $current_page == 'create_event.php') ? 'active' : ''; ?>">
       <i class="bi bi-calendar2-plus"></i>Create New Event
-    </a>
+    </a> -->
 
     <a href="createResource.php"
       class="<?php echo ($current_page == 'createResource.php') ? 'active' : ''; ?>">
@@ -53,6 +53,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <a href="manageCategories.php"
       class="<?php echo ($current_page == 'manageCategories.php') ? 'active' : ''; ?>">
       <i class="bi bi-menu-button-wide"></i>Recipe Categories
+    </a>
+    
+    <a href="manageSocials.php"
+      class="<?php echo ($current_page == 'manageSocials.php') ? 'active' : ''; ?>">
+      <i class="bi bi-globe"></i>Socials
     </a>
 
     <a href="settings.php"

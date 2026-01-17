@@ -29,12 +29,24 @@
       <a href="">Cookie Policy</a>
     </div>
   </div>
+  <?php
+  // Fetch all dynamic social links
+  $social_query = "SELECT platform, url FROM social_links";
+  $social_result = $con->query($social_query);
+  ?>
+
   <div>
     <h4>Follow Us</h4>
     <div class="social-links">
-      <a href=""><i class="bi bi-youtube"></i></a>
-      <a href=""><i class="bi bi-facebook"></i></a>
-      <a href=""><i class="bi bi-instagram"></i></a>
+      <?php if ($social_result && $social_result->num_rows > 0): ?>
+        <?php while ($link = $social_result->fetch_assoc()): ?>
+          <a href="<?php echo htmlspecialchars($link['url']); ?>" target="_blank">
+            <i class="bi bi-<?php echo strtolower(htmlspecialchars($link['platform'])); ?>"></i>
+          </a>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <a href="#"><i class="bi bi-share"></i></a>
+      <?php endif; ?>
     </div>
   </div>
   <?php if (!isset($_COOKIE['foodfusion_cookies'])): ?>

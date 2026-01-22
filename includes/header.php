@@ -78,8 +78,8 @@ if (session_status() === PHP_SESSION_NONE) {
               <div class="buttons-container">
                 <?php if (isset($_SESSION['user_id'])): ?>
                   <span class="user-greeting">Hi, <?php echo htmlspecialchars($_SESSION['first_name']); ?></span>
-                  <a href="profile.php" class="icon-btn" title="My Profile">
-                    <i class="bi bi-person-circle"></i>
+                  <a href="account.php" class="icon-btn" title="My Profile">
+                    <i class="bi bi-person"></i>
                   </a>
                   <a href="logout.php" class="icon-btn" title="Logout">
                     <i class="bi bi-box-arrow-right"></i>
@@ -104,6 +104,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="buttons-container">
           <?php if (isset($_SESSION['user_id'])): ?>
             <span class="user-greeting">Hi, <?php echo htmlspecialchars($_SESSION['first_name']); ?></span>
+            <a href="account.php" class="icon-btn" title="My Profile">
+              <i class="bi bi-person"></i>
+            </a>
             <a href="logout.php" class="icon-btn" title="Logout">
               <i class="bi bi-box-arrow-right"></i>
             </a>

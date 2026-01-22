@@ -17,14 +17,12 @@ if (isset($_POST['send_message_btn'])) {
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $error = "Please enter a valid email address.";
   } else {
-    // Insert into enquiries table
     $sql = "INSERT INTO enquiries (senderName, senderEmail, enquiry, enquiryTypeId) VALUES (?, ?, ?, ?)";
 
     if ($stmt = $con->prepare($sql)) {
       $stmt->bind_param("sssi", $name, $email, $message, $typeId);
 
       if ($stmt->execute()) {
-        // Redirect to clear POST data and trigger success state
         header("Location: contact.php?status=sent");
         exit();
       } else {
@@ -35,12 +33,10 @@ if (isset($_POST['send_message_btn'])) {
   }
 }
 
-// Check for status from URL
 if (isset($_GET['status']) && $_GET['status'] == 'sent') {
   $msg = "Message sent successfully! We will get back to you soon.";
 }
 
-// Fetch Dynamic Social Links for the right sidebar
 $socials = $con->query("SELECT platform, url FROM social_links");
 ?>
 
@@ -102,7 +98,7 @@ $socials = $con->query("SELECT platform, url FROM social_links");
       <div class="info-item social-icons">
         <i class="bi bi-globe"></i>
         <?php while($s = $socials->fetch_assoc()): ?>
-          <a href="<?php echo htmlspecialchars($s['url']); ?>" target="_blank">
+          <a class="social-icon" href="<?php echo htmlspecialchars($s['url']); ?>" target="_blank">
             <?php echo ucfirst($s['platform']); ?>
           </a>
         <?php endwhile; ?>

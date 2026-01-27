@@ -2,7 +2,7 @@
   <div class="cookbook-content">
     <div class="community-profile">
       <div class="community-profile-image">
-        <img src="images/static/profile.png" alt="">
+        <div class="avatar"><?php echo strtoupper($row['firstName'][0]); ?><?php echo strtoupper($row['lastName'][0]); ?></div>
       </div>
       <div>
         <h4><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></h4>

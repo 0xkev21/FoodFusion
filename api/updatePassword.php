@@ -12,26 +12,21 @@ if (isset($_POST['change_password'])) {
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_new_password'];
 
-    // 1. Validation: New passwords must match
     if ($newPassword !== $confirmPassword) {
         $error = "New passwords do not match.";
     } else {
-        // 2. Fetch current hashed password from users table
         $stmt = $con->prepare("SELECT password FROM users WHERE id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
 
-        // 3. Verify the current password
         if (password_verify($currentPassword, $user['password'])) {
-            // 4. Hash the new password and update
             $newHashed = password_hash($newPassword, PASSWORD_DEFAULT);
             $update = $con->prepare("UPDATE users SET password = ? WHERE id = ?");
             $update->bind_param("si", $newHashed, $userId);
 
             if ($update->execute()) {
-                // Redirect with status to trigger your JS Toast notification
                 echo "<script>window.location.href='settings.php?status=success_password';</script>";
                 exit();
             } else {
@@ -49,7 +44,7 @@ if (isset($_POST['change_password'])) {
         <div>
             <h2>Security Settings</h2>
             <p>Update your password to keep your account secure.</p>
-            
+
             <?php if ($error): ?>
                 <p class="auth-error-msg" style="color: #e74c3c; font-weight: bold; margin-bottom: 15px;">
                     <i class="bi bi-exclamation-circle"></i> <?php echo $error; ?>
@@ -82,4 +77,5 @@ if (isset($_POST['change_password'])) {
 
 </main>
 </body>
+
 </html>

@@ -56,7 +56,8 @@ if (isset($_POST['register_btn'])) {
     }
 
     $hashed = password_hash($password, PASSWORD_DEFAULT);
-    $insert = $con->prepare("INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)");
+    $insert = $con->prepare("INSERT INTO users (firstName, lastName, email, password)
+                            VALUES (?, ?, ?, ?)");
     $insert->bind_param("ssss", $first_name, $last_name, $email, $hashed);
 
     if ($insert->execute()) {
@@ -80,7 +81,7 @@ if (isset($_POST['login_btn'])) {
     $password = $_POST['password'];
     $redirectUrl = getRedirectUrl();
 
-    // 1. SESSION LOCKOUT CHECK
+    // SESSION LOCKOUT CHECK
     $now = time();
     if (isset($_SESSION['lockout_until']) && $_SESSION['lockout_until'] > $now) {
         $secondsRemaining = $_SESSION['lockout_until'] - $now;
@@ -113,9 +114,9 @@ if (isset($_POST['login_btn'])) {
             $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
 
             if ($_SESSION['login_attempts'] >= 3) {
-                // Lock for 15 minutes
-                $_SESSION['lockout_until'] = time() + (15 * 60);
-                $errorMsg = "Account locked for 15 minutes due to 3 failed attempts.";
+                // Lock for 3 minutes
+                $_SESSION['lockout_until'] = time() + (3 * 60);
+                $errorMsg = "Account locked for 3 minutes due to 3 failed attempts.";
             } else {
                 $remaining = 3 - $_SESSION['login_attempts'];
                 $errorMsg = "Invalid password. $remaining attempts remaining.";

@@ -27,9 +27,9 @@
   <div>
     <h4>Legal</h4>
     <div>
-      <a href="../privacy-policy.php">Privacy Policy</a>
-      <a href="../terms.php">Terms of Service</a>
-      <a href="../cookie-policy.php">Cookie Policy</a>
+      <a href="./privacy-policy.php">Privacy Policy</a>
+      <a href="./terms.php">Terms of Service</a>
+      <a href="./cookie-policy.php">Cookie Policy</a>
     </div>
   </div>
   <?php
@@ -56,7 +56,10 @@
     <div id="cookie-banner" class="cookie-container">
       <div class="cookie-content">
         <i class="bi bi-cookie"></i>
-        <p>We use cookies to improve your experience on FoodFusion. By clicking "Accept", you agree to our storage of cookies.</p>
+        <p>We use cookies to improve your experience on FoodFusion. By clicking "Accept", you agree to our storage of cookies.
+          <br>
+          <a href="cookie-policy.php">Cookies Information</a>
+        </p>
         <button id="rejectCookiesBtn">Reject</button>
         <button class="primary" id="acceptCookiesBtn">Accept</button>
       </div>

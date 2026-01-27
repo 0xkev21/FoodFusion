@@ -10,7 +10,8 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 $id = intval($_GET['id']);
 include 'db/connect.php';
 
-$sqlRecipe = "SELECT recipes.id, title, description, cuisineType, difficulty, dietaryPref, cookingTimeMinute, imagePath, AVG(rating) as rating from recipes
+$sqlRecipe = "SELECT recipes.id, title, description, cuisineType, difficulty, dietaryPref,
+        cookingTimeMinute, imagePath, AVG(rating) as rating from recipes
         left join reciperating on recipes.id = recipeId 
         join cuisinetypes on cuisineTypeId = cuisinetypes.id
         join cookingdifficulty on difficultyId = cookingdifficulty.id
